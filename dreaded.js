@@ -85,6 +85,7 @@ const dev = process.env.DEV || '254114018035'
  const DevDreaded = dev.split(",");
     const badwordkick = process.env.BAD_WORD_KICK || 'FALSE';
    const bad = process.env.BAD_WORD || 'fuck';
+const botname = process.env.BOTNAME || "DREADED-MD";
 
     const autorecordtypegc = process.env.RECORDING_TYPINGGC || 'TRUE';
     const autoreaddm = process.env.AUTOREAD || 'TRUE';
@@ -130,6 +131,15 @@ const reactionMessage = {
 }
 
 
+async function sendReact(emoji) {
+      let react = {
+        react: {
+          text: emoji,
+          key: m.key,
+        },
+      };
+      await client.sendMessage(m.chat, react);
+    }
 
 
 
@@ -622,7 +632,7 @@ commands[command](client, m);
 break;
 
 case "menu":
-commands[command](client, m, menureply);
+commands[command](client, m, menureply, botname, mode);
 break;
 case "ig":
 commands[command](client, m, text, fetchJson, getBuffer);
@@ -647,7 +657,15 @@ break;
 case "retrieve":
 commands[command](client, m);
 break;
-
+case "ping":
+commands[command](client, m, dreadedspeed, sendReact);
+break;
+case "tempmail":
+commands[command](client, m, text);
+break;
+case "tempinbox":
+commands[command](client, m, text);
+break;
 
 
 
@@ -754,7 +772,27 @@ break
 case "bc":
 commands[command](client, m, text, Owner, NotOwner, participants, pushname);
 
+break;
 
+case "allvar":
+commands[command](client, m, text, Owner, NotOwner, herokuapi, appname);
+
+break;
+
+case "getvar":
+commands[command](client, m, text, Owner, NotOwner, herokuapi, appname);
+
+
+break;
+case "update":
+commands[command](client, m, text, Owner, NotOwner, herokuapi, appname);
+
+break;
+
+case "setvar":
+commands[command](client, m, text, Owner, NotOwner, herokuapi, appname, arg);
+
+break;
 
 
 
